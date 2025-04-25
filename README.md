@@ -73,7 +73,7 @@ Basic example:
 ```php
 class AuthController extends Controller
 {
-    public function login()
+     public function showLogin()
     {
         return view('auth.login');
     }
@@ -81,5 +81,5 @@ class AuthController extends Controller
 ```
 Define route to controller:
 ```php
-Route::get('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'showLogin']);
 ```
