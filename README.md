@@ -29,5 +29,7 @@ return view('welcome'); // resources/views/welcome.blade.php
 ```
 You can pass data to a view:
 ```php
-return view('profile', ['name' => 'Taylor']);
+return view('profile', ['name' => 'Taylor']); // fixed value
+return view('profile', ['name' => $name]); // varible
+return view('profile', compact('name')); // if both values (varible and datavalue have the same name
 ```
