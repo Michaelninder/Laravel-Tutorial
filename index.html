@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel Tutorial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Laravel Tutorial</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#routes">Routes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#views">Views</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#controllers">Controllers</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h1 class="display-4 text-center">Laravel Tutorial</h1>
+      <hr>
+
+      <!-- Routes Section -->
+      <section id="routes">
+        <h2 class="mt-5">Routes</h2>
+        <p>In Laravel, all routes are defined in the <code>routes/web.php</code> file for web interfaces or <code>routes/api.php</code> for API routes.</p>
+        
+        <h3>Router Methods</h3>
+        <pre><code>
+Route::get($uri, $callback);
+Route::post($uri, $callback);
+Route::put($uri, $callback);
+Route::patch($uri, $callback);
+Route::delete($uri, $callback);
+Route::options($uri, $callback);
+Route::view($uri, $view, $data = []);
+Route::redirect($from, $to, $status = 302);
+        </code></pre>
+        <p><strong>uri:</strong> <code>'/'</code> or <code>'/some/route'</code></p>
+        <p><strong>callback:</strong> <code>function () { // ... }</code> or <code>[Controller::class, 'myfunction']</code></p>
+
+        <h3>Grouping Routes or Applying Middleware</h3>
+        <pre><code>
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        // Only authenticated users may access this route...
+    });
+});
+        </code></pre>
+      </section>
+
+      <hr>
+
+      <!-- Views Section -->
+      <section id="views">
+        <h2 class="mt-5">Views</h2>
+        <p>Create a controller using Artisan:</p>
+        <pre><code>
+php artisan make:view auth.login // creates resources/views/auth/login.blade.php
+        </code></pre>
+        <p>Views are stored in the <code>resources/views</code> directory. To return a view from a route or controller:</p>
+        <pre><code>
+return view('welcome'); // resources/views/welcome.blade.php
+return view('auth.login'); // resources/views/auth/login.blade.php
+        </code></pre>
+
+        <h3>Passing Data to Views</h3>
+        <pre><code>
+return view('profile', ['name' => 'Michaelninder']); // fixed value
+return view('profile', ['name' => $name]); // variable
+return view('profile', compact('name')); // if both values (variable and datavalue have the same name)
+        </code></pre>
+        <p>Example Blade File (<code>resources/views/profile.blade.php</code>):</p>
+        <pre><code>
+&lt;h1&gt;Hello, {{ $name }}&lt;/h1&gt;
+        </code></pre>
+
+        <h3>Blade Directives</h3>
+        <pre><code>
+@if ($user)
+    Hello, {{ $user->name }}
+@endif
+        </code></pre>
+        <p>This section will soon be continued with loops, conditionals, layouts (<code>@extends</code>, <code>@section</code>, <code>@yield</code>) and components.</p>
+      </section>
+
+      <hr>
+
+      <!-- Controllers Section -->
+      <section id="controllers">
+        <h2 class="mt-5">Controllers</h2>
+        <p>Create a controller using Artisan:</p>
+        <pre><code>
+php artisan make:controller AuthController
+        </code></pre>
+
+        <h3>Basic Example</h3>
+        <pre><code>
+class AuthController extends Controller
+{
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+}
+        </code></pre>
+
+        <h3>Defining Route to Controller</h3>
+        <pre><code>
+Route::get('/login', [AuthController::class, 'showLogin']);
+        </code></pre>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+      <p>&copy; 2025 Laravel Tutorial. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
+</html>
