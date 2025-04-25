@@ -61,5 +61,17 @@ This section will soon be continued with loops, conditionals, layouts (`@extends
 ## Controllers
 Create a controller using Artisan:
 ```
-php artisan make:controller UserController
+php artisan make:controller AuthController
 ```
+Basic example:
+```php
+class AuthController extends Controller
+{
+    public function login()
+    {
+        return view('auth.login');
+    }
+}
+```
+Define route to controller:
+Route::get('/login', [AuthController::class, 'login']);
