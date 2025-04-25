@@ -1,5 +1,4 @@
 # Laravel Tutorial
-<br>
 ## Routes
 In Laravel, all routes are defined in the `routes/web.php` file for web interfaces or `routes/api.php` for API routes.
 ## Router Methods
