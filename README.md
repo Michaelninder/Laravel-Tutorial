@@ -46,4 +46,5 @@ Blade is Laravel’s templating engine. You can use directives like:
     Hello, {{ $user->name }}
 @endif
 ```
-Want me to continue this section with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) or components?
+This section will soon be continued with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) and componentsa
+
