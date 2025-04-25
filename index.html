@@ -20,6 +20,11 @@
       }
       .navbar .nav-link.active {
         background-color: #0069d9 !important;
+        color: white !important;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .navbar .nav-link {
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
     </style>
   </head>
@@ -294,31 +299,14 @@ $request->validate([
 
       <section id="auth">
         <h2 class="mt-5">Authentication <i class="bi bi-person-check"></i></h2>
-        <p>Laravel offers a built-in authentication system for handling login and registration.</p>
+        <p>Laravel offers a built-in authentication system.</p>
 
-        <h3>Authentication Scaffolding</h3>
-        <p>Use the following Artisan command to scaffold authentication views and routes:</p>
+        <h3>Authentication Setup</h3>
         <div class="code-box">
           <pre><code>
-php artisan make:auth
-          </code></pre>
-        </div>
-
-        <h3>Protecting Routes with Auth</h3>
-        <div class="code-box">
-          <pre><code>
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-          </code></pre>
-        </div>
-
-        <h3>Logging Out</h3>
-        <div class="code-box">
-          <pre><code>
-public function logout()
-{
-    Auth::logout();
-    return redirect('/login');
-}
+composer require laravel/ui
+php artisan ui bootstrap --auth
+php artisan migrate
           </code></pre>
         </div>
       </section>
@@ -327,18 +315,23 @@ public function logout()
 
       <section id="database">
         <h2 class="mt-5">Database & Eloquent <i class="bi bi-database"></i></h2>
-        <p>Laravel's Eloquent ORM makes it easy to interact with your database.</p>
+        <p>Laravel uses Eloquent ORM for database operations, making it simple to interact with your database.</p>
 
-        <h3>Database Migrations</h3>
-        <p>Create a migration using Artisan:</p>
+        <h3>Database Migration</h3>
         <div class="code-box">
           <pre><code>
-php artisan make:migration create_posts_table
+php artisan make:migration create_posts_table --create=posts
           </code></pre>
         </div>
 
-        <h3>Eloquent Models</h3>
-        <p>Eloquent provides an easy way to interact with your database records:</p>
+        <h3>Running Migrations</h3>
+        <div class="code-box">
+          <pre><code>
+php artisan migrate
+          </code></pre>
+        </div>
+
+        <h3>Eloquent Model</h3>
         <div class="code-box">
           <pre><code>
 class Post extends Model
@@ -347,63 +340,60 @@ class Post extends Model
 }
           </code></pre>
         </div>
-
-        <h3>Querying with Eloquent</h3>
-        <div class="code-box">
-          <pre><code>
-$posts = Post::where('status', 'published')->get();
-          </code></pre>
-        </div>
-
-        <h3>Inserting Data</h3>
-        <div class="code-box">
-          <pre><code>
-Post::create([
-    'title' => 'New Post',
-    'content' => 'Post content here...',
-]);
-          </code></pre>
-        </div>
       </section>
 
       <hr>
 
       <section id="advanced">
         <h2 class="mt-5">Advanced Features <i class="bi bi-gear"></i></h2>
-        <p>Laravel provides several advanced features for building powerful applications:</p>
-        <ul>
-          <li><strong>Queues</strong>: Handle background tasks asynchronously.</li>
-          <li><strong>Events & Listeners</strong>: Listen for and handle events in your application.</li>
-          <li><strong>Jobs</strong>: Encapsulate logic to be run asynchronously or in the background.</li>
-          <li><strong>Notifications</strong>: Send notifications via various channels like email, SMS, and database.</li>
-          <li><strong>Mail</strong>: Send email from your application.</li>
-          <li><strong>Task Scheduling</strong>: Automatically schedule tasks such as clearing logs or sending daily emails.</li>
-        </ul>
+        <p>Laravel provides many advanced features to streamline common development tasks.</p>
+
+        <h3>Queues</h3>
+        <div class="code-box">
+          <pre><code>
+php artisan queue:work
+          </code></pre>
+        </div>
+
+        <h3>Events and Listeners</h3>
+        <div class="code-box">
+          <pre><code>
+php artisan make:event UserRegistered
+php artisan make:listener SendWelcomeEmail
+          </code></pre>
+        </div>
+
+        <h3>Mail</h3>
+        <div class="code-box">
+          <pre><code>
+php artisan make:mail WelcomeEmail
+          </code></pre>
+        </div>
       </section>
+
     </div>
 
-    <footer class="bg-primary text-white text-center py-3">
-      <p>&copy; 2025 Laravel Tutorial. All rights reserved.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      document.addEventListener('scroll', function() {
-        var sections = document.querySelectorAll('section');
-        var navLinks = document.querySelectorAll('#navbarLinks .nav-link');
+      document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
         
-        sections.forEach(function(section) {
-          var top = section.offsetTop - 50;
-          var bottom = section.offsetTop + section.offsetHeight;
+        window.addEventListener('scroll', function () {
+          let current = "";
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.pageYOffset >= sectionTop - 50) {
+              current = section.getAttribute('id');
+            }
+          });
           
-          if (window.scrollY >= top && window.scrollY < bottom) {
-            navLinks.forEach(function(link) {
-              link.classList.remove('active');
-              if (link.getAttribute('href').substring(1) === section.id) {
-                link.classList.add('active');
-              }
-            });
-          }
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+              link.classList.add('active');
+            }
+          });
         });
       });
     </script>
