@@ -382,138 +382,138 @@ php artisan make:mail WelcomeEmail
       <hr>
 
       <section id="localization">
-        <h2 class="mt-5">Localization <i class="bi bi-globe"></i></h2>
-        <p>Laravel makes it easy to manage application translations and localize your content for different languages and regions.</p>
-
-        <h3>Creating Language Files</h3>
-        <p>Language files are stored in the <code>resources/lang</code> directory. You can create language-specific files within this directory (e.g., <code>resources/lang/en/messages.php</code>).</p>
-        <div class="code-box">
-          <pre><code>
-return [
-    'welcome' => 'Welcome to our application!',
-];
-          </code></pre>
-        </div>
-
-        <h3>Using Localization in Views</h3>
-        <p>To display translated text, use the <code>@lang</code> directive:</p>
-        <div class="code-box">
-          <pre><code>
-<h1>@lang('messages.welcome')</h1>
-          </code></pre>
-        </div>
-
-        <h3>Setting the Locale</h3>
-        <p>You can set the application’s locale in <code>config/app.php</code>:</p>
-        <div class="code-box">
-          <pre><code>
-'locale' => 'en',
-          </code></pre>
-        </div>
-        <p>Or dynamically change it using the <code>App::setLocale()</code> method:</p>
-        <div class="code-box">
-          <pre><code>
-App::setLocale('fr');
-          </code></pre>
-        </div>
-
-        <h3>Pluralization</h3>
-        <p>Laravel can handle plural forms with the <code>@choice</code> directive:</p>
-        <div class="code-box">
-          <pre><code>
-@choice('messages.apples', 5)
-          </code></pre>
-        </div>
-
-        <p>In the language file, you can define the pluralization rules:</p>
-        <div class="code-box">
-          <pre><code>
-return [
-    'apples' => '{1} :count apple|[2,*] :count apples',
-];
-          </code></pre>
-        </div>
-
-      </section>
-
-      <hr>
-
-      <section id="blade">
-        <h2 class="mt-5">Blade Advanced <i class="bi bi-file-earmark-code"></i></h2>
-        <p>Laravel Blade is a powerful templating engine. It provides features like loops, conditionals, and includes for dynamic and reusable views.</p>
-
-        <h3>Blade Loops</h3>
-        <p>You can use loops in Blade to iterate over collections or arrays:</p>
-        <div class="code-box">
-          <pre><code>
-@foreach ($users as $user)
-    <p>{{ $user->name }}</p>
-@endforeach
-          </code></pre>
-        </div>
-
-        <h3>Blade Conditionals</h3>
-        <p>Use <code>@if</code>, <code>@else</code>, and <code>@elseif</code> for conditional statements:</p>
-        <div class="code-box">
-          <pre><code>
-@if ($user->isAdmin())
-    <p>Welcome, admin!</p>
-@else
-    <p>Welcome, regular user!</p>
-@endif
-          </code></pre>
-        </div>
-
-        <h3>Including Views</h3>
-        <p>You can include Blade views within other views using the <code>@include</code> directive:</p>
-        <div class="code-box">
-          <pre><code>
-@include('partials.header')
-          </code></pre>
-        </div>
-
-        <h3>Blade Components</h3>
-        <p>Components allow you to create reusable pieces of HTML:</p>
-        <div class="code-box">
-          <pre><code>
-<x-alert type="success" :message="$message" />
-          </code></pre>
-        </div>
-        <p>Component view (e.g., <code>resources/views/components/alert.blade.php</code>):</p>
-        <div class="code-box">
-          <pre><code>
-<div class="alert alert-{{ $type }}">
-    {{ $message }}
-</div>
-          </code></pre>
-        </div>
-
-        <h3>Blade Layouts</h3>
-        <p>Use layouts to structure common HTML across multiple views:</p>
-        <div class="code-box">
-          <pre><code>
-&lt;!-- resources/views/layouts/app.blade.php --&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    @yield('content')
-  &lt;/body&gt;
-&lt;/html&gt;
-          </code></pre>
-        </div>
-
-        <div class="code-box">
-          <pre><code>
-&lt;!-- resources/views/home.blade.php --&gt;
-@extends('layouts.app')
-
-@section('content')
-  &lt;h1&gt;Home Page&lt;/h1&gt;
-@endsection
-          </code></pre>
-        </div>
-      </section>
-
-      <hr>
+	    <h2 class="mt-5">Localization <i class="bi bi-globe"></i></h2>
+	    <p>Laravel makes it easy to manage application translations and localize your content for different languages and regions.</p>
+	  
+	    <h3>Creating Language Files</h3>
+	    <p>Language files are stored in the <code>resources/lang</code> directory. You can create language-specific files within this directory (e.g., <code>resources/lang/en/messages.php</code>).</p>
+	    <div class="code-box">
+	      <pre><code>
+	  return [
+	      'welcome' => 'Welcome to our application!',
+	  ];
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Using Localization in Views</h3>
+	    <p>To display translated text, use the <code>@lang</code> directive:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  &lt;h1&gt;@lang('messages.welcome')&lt;/h1&gt;
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Setting the Locale</h3>
+	    <p>You can set the application’s locale in <code>config/app.php</code>:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  'locale' => 'en',
+	      </code></pre>
+	    </div>
+	    <p>Or dynamically change it using the <code>App::setLocale()</code> method:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  App::setLocale('fr');
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Pluralization</h3>
+	    <p>Laravel can handle plural forms with the <code>@choice</code> directive:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  @choice('messages.apples', 5)
+	      </code></pre>
+	    </div>
+	  
+	    <p>In the language file, you can define the pluralization rules:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  return [
+	      'apples' => '{1} :count apple|[2,*] :count apples',
+	  ];
+	      </code></pre>
+	    </div>
+	  
+	  </section>
+	  
+	  <hr>
+	  
+	  <section id="blade">
+	    <h2 class="mt-5">Blade Advanced <i class="bi bi-file-earmark-code"></i></h2>
+	    <p>Laravel Blade is a powerful templating engine. It provides features like loops, conditionals, and includes for dynamic and reusable views.</p>
+	  
+	    <h3>Blade Loops</h3>
+	    <p>You can use loops in Blade to iterate over collections or arrays:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  @foreach ($users as $user)
+	      &lt;p&gt;{{ $user->name }}&lt;/p&gt;
+	  @endforeach
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Blade Conditionals</h3>
+	    <p>Use <code>@if</code>, <code>@else</code>, and <code>@elseif</code> for conditional statements:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  @if ($user->isAdmin())
+	      &lt;p&gt;Welcome, admin!&lt;/p&gt;
+	  @else
+	      &lt;p&gt;Welcome, regular user!&lt;/p&gt;
+	  @endif
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Including Views</h3>
+	    <p>You can include Blade views within other views using the <code>@include</code> directive:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  @include('partials.header')
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Blade Components</h3>
+	    <p>Components allow you to create reusable pieces of HTML:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  <x-alert type="success" :message="$message" />
+	      </code></pre>
+	    </div>
+	    <p>Component view (e.g., <code>resources/views/components/alert.blade.php</code>):</p>
+	    <div class="code-box">
+	      <pre><code>
+	  &lt;div class="alert alert-{{ $type }}"&gt;
+	      {{ $message }}
+	  &lt;/div&gt;
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Blade Layouts</h3>
+	    <p>Use layouts to structure common HTML across multiple views:</p>
+	    <div class="code-box">
+	      <pre><code>
+	  &lt;!-- resources/views/layouts/app.blade.php --&gt;
+	  &lt;html&gt;
+	    &lt;body&gt;
+	      @yield('content')
+	    &lt;/body&gt;
+	  &lt;/html&gt;
+	      </code></pre>
+	    </div>
+	  
+	    <div class="code-box">
+	      <pre><code>
+	  &lt;!-- resources/views/home.blade.php --&gt;
+	  @extends('layouts.app')
+	  
+	  @section('content')
+	    &lt;h1&gt;Home Page&lt;/h1&gt;
+	  @endsection
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <hr>
 
     </div>
 
