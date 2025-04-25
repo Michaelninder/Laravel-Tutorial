@@ -1,5 +1,6 @@
 # Laravel Tutorial
 
+
 ## Routes
 In Laravel, all routes are defined in the `routes/web.php` file for web interfaces or `routes/api.php` for API routes.
 ## Router Methods
@@ -21,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 ```
+
+
 ## Views
 Views are stored in the `resources/views` directory.
 To return a view from a route or controller:
@@ -48,3 +51,9 @@ Blade is Laravel’s templating engine. You can use directives like:
 ```
 This section will soon be continued with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) and componentsa
 
+
+## Controllers
+Create a controller using Artisan:
+```
+php artisan make:controller UserController
+```
