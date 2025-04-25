@@ -27,9 +27,17 @@ To return a view from a route or controller:
 ```php
 return view('welcome'); // resources/views/welcome.blade.php
 ```
-You can pass data to a view:
+### Passing Data to Views
+You can pass data to a view in several ways:
 ```php
 return view('profile', ['name' => 'Taylor']); // fixed value
+
 return view('profile', ['name' => $name]); // varible
+
 return view('profile', compact('name')); // if both values (varible and datavalue have the same name
 ```
+Example Blade File (resources/views/profile.blade.php)
+```php
+<h1>Hello, {{ $name }}</h1>
+```
+Want me to continue this section with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) or components?
