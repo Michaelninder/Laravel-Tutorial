@@ -40,4 +40,10 @@ Example Blade File (resources/views/profile.blade.php)
 ```php
 <h1>Hello, {{ $name }}</h1>
 ```
+Blade is Laravel’s templating engine. You can use directives like:
+```php
+@if ($user)
+    Hello, {{ $user->name }}
+@endif
+```
 Want me to continue this section with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) or components?
