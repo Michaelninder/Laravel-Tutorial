@@ -1,6 +1,6 @@
 # Laravel Tutorial
 
-
+---
 ## Routes
 In Laravel, all routes are defined in the `routes/web.php` file for web interfaces or `routes/api.php` for API routes.
 ## Router Methods
@@ -14,21 +14,11 @@ Route::options($uri, $callback);
 Route::view($uri, $view, $data = []);
 Route::redirect($from, $to, $status = 302);
 ```
-uri:
-```php
-'/'
+uri: `'/'` or  `'/some/route'`
 
-'/some/route'
-```
-callback:
-```php
-function () {
-    // ...
-}
+callback: `function () { // ... }` or `[Controller::class, 'myfunction']`
 
-[Controller::class, 'myfunction']
-```
-
+---
 You can also group routes or apply middleware:
 ```php
 Route::middleware(['auth'])->group(function () {
@@ -37,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 ```
-
+---
 
 ## Views
 Create a controller using Artisan:
@@ -51,6 +41,7 @@ return view('welcome'); // resources/views/welcome.blade.php
 
 return view('auth.login'); // resources/views/auth/login.blade.php
 ```
+---
 ### Passing Data to Views
 You can pass data to a view in several ways:
 ```php
@@ -72,7 +63,7 @@ Blade is Laravel’s templating engine. You can use directives like:
 ```
 This section will soon be continued with loops, conditionals, layouts (`@extends`, `@section`, `@yield`) and componentsa
 
-
+---
 ## Controllers
 Create a controller using Artisan:
 ```
@@ -89,4 +80,6 @@ class AuthController extends Controller
 }
 ```
 Define route to controller:
+```php
 Route::get('/login', [AuthController::class, 'login']);
+```
