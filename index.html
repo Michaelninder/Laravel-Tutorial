@@ -14,6 +14,8 @@
         color: #f8f9fa;
         border-radius: 5px;
         padding: 10px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
       }
       .code-box code {
         font-size: 1.1em;
@@ -150,26 +152,26 @@ return view('profile', compact('name')); // if both values (variable and dataval
         <p>Laravel Blade also supports layouts and components:</p>
         <div class="code-box">
           <pre><code>
-<!-- resources/views/layouts/app.blade.php -->
-<html>
-  <head>
-    <title>@yield('title')</title>
-  </head>
-  <body>
+&lt;!-- resources/views/layouts/app.blade.php --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;@yield('title')&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
     @yield('content')
-  </body>
-</html>
+  &lt;/body&gt;
+&lt;/html&gt;
           </code></pre>
         </div>
         <div class="code-box">
           <pre><code>
-<!-- resources/views/home.blade.php -->
+&lt;!-- resources/views/home.blade.php --&gt;
 @extends('layouts.app')
 
 @section('title', 'Home Page')
 
 @section('content')
-  <h1>Welcome to Home!</h1>
+  &lt;h1&gt;Welcome to Home!&lt;/h1&gt;
 @endsection
           </code></pre>
         </div>
@@ -380,17 +382,17 @@ php artisan make:mail WelcomeEmail
         const navLinks = document.querySelectorAll('.nav-link');
         
         window.addEventListener('scroll', function () {
-          let current = "";
+          let currentSection = null;
           sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.pageYOffset >= sectionTop - 50) {
-              current = section.getAttribute('id');
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 0 && rect.bottom > 0) {
+              currentSection = section;
             }
           });
           
           navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
+            if (currentSection && currentSection.id === link.getAttribute('href').substring(1)) {
               link.classList.add('active');
             }
           });
