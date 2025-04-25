@@ -16,7 +16,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" id="navbarLinks">
             <li class="nav-item">
               <a class="nav-link" href="#routes"><i class="bi bi-code-slash"></i> Routes</a>
             </li>
@@ -74,6 +74,14 @@ Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
         <p>Now, you can refer to this route using its name in your views or controllers:</p>
         <pre><code>
 route('profile.show');
+        </code></pre>
+        
+        <h3>Route Parameters</h3>
+        <p>You can also define parameters in your routes:</p>
+        <pre><code>
+Route::get('/user/{id}', function ($id) {
+    return 'User ID: ' . $id;
+});
         </code></pre>
       </section>
 
@@ -181,6 +189,7 @@ Route::resource('posts', PostController::class);
           <li><strong>Jobs</strong>: Encapsulate logic to be run asynchronously or in the background.</li>
           <li><strong>Notifications</strong>: Send notifications via various channels like email, SMS, and database.</li>
           <li><strong>Mail</strong>: Send email from your application.</li>
+          <li><strong>Task Scheduling</strong>: Automatically schedule tasks such as clearing logs or sending daily emails.</li>
         </ul>
         <p>We'll dive into these topics in future tutorials!</p>
       </section>
@@ -192,5 +201,26 @@ Route::resource('posts', PostController::class);
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+      // JavaScript to highlight active navbar link based on scroll position
+      document.addEventListener('scroll', function() {
+        var sections = document.querySelectorAll('section');
+        var navLinks = document.querySelectorAll('#navbarLinks .nav-link');
+        
+        sections.forEach(function(section) {
+          var top = section.offsetTop - 50;
+          var bottom = section.offsetTop + section.offsetHeight;
+          
+          if (window.scrollY >= top && window.scrollY < bottom) {
+            navLinks.forEach(function(link) {
+              link.classList.remove('active');
+              if (link.getAttribute('href').substring(1) === section.id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
