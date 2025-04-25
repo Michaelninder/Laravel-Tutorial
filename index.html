@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   </head>
   <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Laravel Tutorial</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,30 +18,30 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link" href="#routes"><i class="bi bi-code-slash"></i> Routes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#routes">Routes</a>
+              <a class="nav-link" href="#views"><i class="bi bi-file-earmark-code"></i> Views</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#views">Views</a>
+              <a class="nav-link" href="#controllers"><i class="bi bi-person-workspace"></i> Controllers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#controllers">Controllers</a>
+              <a class="nav-link" href="#advanced"><i class="bi bi-gear"></i> Advanced Features</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container my-5">
+    <div class="container my-5 pt-5">
       <h1 class="display-4 text-center">Laravel Tutorial</h1>
       <hr>
 
       <!-- Routes Section -->
       <section id="routes">
-        <h2 class="mt-5">Routes</h2>
-        <p>In Laravel, all routes are defined in the <code>routes/web.php</code> file for web interfaces or <code>routes/api.php</code> for API routes.</p>
+        <h2 class="mt-5">Routes <i class="bi bi-arrow-right-circle"></i></h2>
+        <p>In Laravel, all routes are defined in the <code>routes/web.php</code> file for web interfaces or <code>routes/api.php</code> for API routes. Routes act as the entry points for web requests.</p>
         
         <h3>Router Methods</h3>
         <pre><code>
@@ -65,24 +65,36 @@ Route::middleware(['auth'])->group(function () {
     });
 });
         </code></pre>
+
+        <h3>Named Routes</h3>
+        <p>You can also give your routes a name to make them easier to refer to:</p>
+        <pre><code>
+Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
+        </code></pre>
+        <p>Now, you can refer to this route using its name in your views or controllers:</p>
+        <pre><code>
+route('profile.show');
+        </code></pre>
       </section>
 
       <hr>
 
       <!-- Views Section -->
       <section id="views">
-        <h2 class="mt-5">Views</h2>
-        <p>Create a controller using Artisan:</p>
+        <h2 class="mt-5">Views <i class="bi bi-file-earmark-code"></i></h2>
+        <p>In Laravel, views are located in the <code>resources/views</code> directory. To create a view using Artisan:</p>
         <pre><code>
 php artisan make:view auth.login // creates resources/views/auth/login.blade.php
         </code></pre>
-        <p>Views are stored in the <code>resources/views</code> directory. To return a view from a route or controller:</p>
+        
+        <h3>Returning Views</h3>
         <pre><code>
 return view('welcome'); // resources/views/welcome.blade.php
 return view('auth.login'); // resources/views/auth/login.blade.php
         </code></pre>
 
         <h3>Passing Data to Views</h3>
+        <p>You can pass data to a view in several ways:</p>
         <pre><code>
 return view('profile', ['name' => 'Michaelninder']); // fixed value
 return view('profile', ['name' => $name]); // variable
@@ -99,20 +111,26 @@ return view('profile', compact('name')); // if both values (variable and dataval
     Hello, {{ $user->name }}
 @endif
         </code></pre>
-        <p>This section will soon be continued with loops, conditionals, layouts (<code>@extends</code>, <code>@section</code>, <code>@yield</code>) and components.</p>
+        <p>Blade also provides convenient directives for loops and conditionals, including:</p>
+        <pre><code>
+@foreach ($users as $user)
+    {{ $user->name }}
+@endforeach
+        </code></pre>
+        <p>This section will soon be continued with layouts (<code>@extends</code>, <code>@section</code>, <code>@yield</code>) and components.</p>
       </section>
 
       <hr>
 
       <!-- Controllers Section -->
       <section id="controllers">
-        <h2 class="mt-5">Controllers</h2>
-        <p>Create a controller using Artisan:</p>
+        <h2 class="mt-5">Controllers <i class="bi bi-person-workspace"></i></h2>
+        <p>Controllers are responsible for handling HTTP requests and returning responses. You can create a controller with Artisan:</p>
         <pre><code>
 php artisan make:controller AuthController
         </code></pre>
 
-        <h3>Basic Example</h3>
+        <h3>Basic Controller Example</h3>
         <pre><code>
 class AuthController extends Controller
 {
@@ -127,6 +145,44 @@ class AuthController extends Controller
         <pre><code>
 Route::get('/login', [AuthController::class, 'showLogin']);
         </code></pre>
+
+        <h3>Controller with Dependency Injection</h3>
+        <p>Laravel supports automatic injection of dependencies into controllers:</p>
+        <pre><code>
+class UserController extends Controller
+{
+    public function showProfile(User $user)
+    {
+        return view('profile', compact('user'));
+    }
+}
+        </code></pre>
+
+        <h3>Resource Controllers</h3>
+        <p>You can generate a resource controller to handle CRUD operations:</p>
+        <pre><code>
+php artisan make:controller PostController --resource
+        </code></pre>
+        <p>Then, you can define the routes to resource methods in your routes file:</p>
+        <pre><code>
+Route::resource('posts', PostController::class);
+        </code></pre>
+      </section>
+
+      <hr>
+
+      <!-- Advanced Section -->
+      <section id="advanced">
+        <h2 class="mt-5">Advanced Features <i class="bi bi-gear"></i></h2>
+        <p>Laravel provides a range of advanced features, including:</p>
+        <ul>
+          <li><strong>Queues</strong>: Handle background tasks asynchronously.</li>
+          <li><strong>Events & Listeners</strong>: Listen for and handle events in your application.</li>
+          <li><strong>Jobs</strong>: Encapsulate logic to be run asynchronously or in the background.</li>
+          <li><strong>Notifications</strong>: Send notifications via various channels like email, SMS, and database.</li>
+          <li><strong>Mail</strong>: Send email from your application.</li>
+        </ul>
+        <p>We'll dive into these topics in future tutorials!</p>
       </section>
     </div>
 
