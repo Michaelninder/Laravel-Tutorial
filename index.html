@@ -6,9 +6,30 @@
     <title>Laravel Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+      .code-box {
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        color: #333;
+        font-family: monospace;
+      }
+      .code-box pre {
+        background-color: #272c34;
+        color: #f8f9fa;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      .code-box code {
+        font-size: 1.1em;
+      }
+      .navbar .nav-link.active {
+        background-color: #0069d9 !important;
+      }
+    </style>
   </head>
   <body>
-    <!-- Fixed Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Laravel Tutorial</a>
@@ -18,7 +39,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav" id="navbarLinks">
             <li class="nav-item">
-              <a class="nav-link" href="#routes"><i class="bi bi-code-slash"></i> Routes</a>
+              <a class="nav-link" href="#routes"><i class="bi bi-map"></i> Routes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#views"><i class="bi bi-file-earmark-code"></i> Views</a>
@@ -38,13 +59,13 @@
       <h1 class="display-4 text-center">Laravel Tutorial</h1>
       <hr>
 
-      <!-- Routes Section -->
       <section id="routes">
         <h2 class="mt-5">Routes <i class="bi bi-arrow-right-circle"></i></h2>
-        <p>In Laravel, all routes are defined in the <code>routes/web.php</code> file for web interfaces or <code>routes/api.php</code> for API routes. Routes act as the entry points for web requests.</p>
-        
+        <p>In Laravel, all routes are defined in the <code>routes/web.php</code> file for web interfaces or <code>routes/api.php</code> for API routes.</p>
+
         <h3>Router Methods</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 Route::get($uri, $callback);
 Route::post($uri, $callback);
 Route::put($uri, $callback);
@@ -53,93 +74,105 @@ Route::delete($uri, $callback);
 Route::options($uri, $callback);
 Route::view($uri, $view, $data = []);
 Route::redirect($from, $to, $status = 302);
-        </code></pre>
+          </code></pre>
+        </div>
         <p><strong>uri:</strong> <code>'/'</code> or <code>'/some/route'</code></p>
         <p><strong>callback:</strong> <code>function () { // ... }</code> or <code>[Controller::class, 'myfunction']</code></p>
 
         <h3>Grouping Routes or Applying Middleware</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         // Only authenticated users may access this route...
     });
 });
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Named Routes</h3>
         <p>You can also give your routes a name to make them easier to refer to:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
-        </code></pre>
+          </code></pre>
+        </div>
         <p>Now, you can refer to this route using its name in your views or controllers:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 route('profile.show');
-        </code></pre>
-        
+          </code></pre>
+        </div>
+
         <h3>Route Parameters</h3>
-        <p>You can also define parameters in your routes:</p>
-        <pre><code>
+        <p>You can define parameters in your routes:</p>
+        <div class="code-box">
+          <pre><code>
 Route::get('/user/{id}', function ($id) {
     return 'User ID: ' . $id;
 });
-        </code></pre>
+          </code></pre>
+        </div>
       </section>
 
       <hr>
 
-      <!-- Views Section -->
       <section id="views">
         <h2 class="mt-5">Views <i class="bi bi-file-earmark-code"></i></h2>
-        <p>In Laravel, views are located in the <code>resources/views</code> directory. To create a view using Artisan:</p>
-        <pre><code>
-php artisan make:view auth.login // creates resources/views/auth/login.blade.php
-        </code></pre>
-        
+        <p>In Laravel, views are located in the <code>resources/views</code> directory.</p>
+
         <h3>Returning Views</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 return view('welcome'); // resources/views/welcome.blade.php
 return view('auth.login'); // resources/views/auth/login.blade.php
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Passing Data to Views</h3>
         <p>You can pass data to a view in several ways:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 return view('profile', ['name' => 'Michaelninder']); // fixed value
 return view('profile', ['name' => $name]); // variable
 return view('profile', compact('name')); // if both values (variable and datavalue have the same name)
-        </code></pre>
+          </code></pre>
+        </div>
         <p>Example Blade File (<code>resources/views/profile.blade.php</code>):</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 &lt;h1&gt;Hello, {{ $name }}&lt;/h1&gt;
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Blade Directives</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 @if ($user)
     Hello, {{ $user->name }}
 @endif
-        </code></pre>
+          </code></pre>
+        </div>
         <p>Blade also provides convenient directives for loops and conditionals, including:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 @foreach ($users as $user)
     {{ $user->name }}
 @endforeach
-        </code></pre>
+          </code></pre>
+        </div>
         <p>This section will soon be continued with layouts (<code>@extends</code>, <code>@section</code>, <code>@yield</code>) and components.</p>
       </section>
 
       <hr>
 
-      <!-- Controllers Section -->
       <section id="controllers">
         <h2 class="mt-5">Controllers <i class="bi bi-person-workspace"></i></h2>
-        <p>Controllers are responsible for handling HTTP requests and returning responses. You can create a controller with Artisan:</p>
-        <pre><code>
-php artisan make:controller AuthController
-        </code></pre>
+        <p>Controllers are responsible for handling HTTP requests and returning responses.</p>
 
         <h3>Basic Controller Example</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 class AuthController extends Controller
 {
     public function showLogin()
@@ -147,16 +180,19 @@ class AuthController extends Controller
         return view('auth.login');
     }
 }
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Defining Route to Controller</h3>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 Route::get('/login', [AuthController::class, 'showLogin']);
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Controller with Dependency Injection</h3>
-        <p>Laravel supports automatic injection of dependencies into controllers:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 class UserController extends Controller
 {
     public function showProfile(User $user)
@@ -164,22 +200,26 @@ class UserController extends Controller
         return view('profile', compact('user'));
     }
 }
-        </code></pre>
+          </code></pre>
+        </div>
 
         <h3>Resource Controllers</h3>
         <p>You can generate a resource controller to handle CRUD operations:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 php artisan make:controller PostController --resource
-        </code></pre>
+          </code></pre>
+        </div>
         <p>Then, you can define the routes to resource methods in your routes file:</p>
-        <pre><code>
+        <div class="code-box">
+          <pre><code>
 Route::resource('posts', PostController::class);
-        </code></pre>
+          </code></pre>
+        </div>
       </section>
 
       <hr>
 
-      <!-- Advanced Section -->
       <section id="advanced">
         <h2 class="mt-5">Advanced Features <i class="bi bi-gear"></i></h2>
         <p>Laravel provides a range of advanced features, including:</p>
@@ -195,14 +235,12 @@ Route::resource('posts', PostController::class);
       </section>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3">
       <p>&copy; 2025 Laravel Tutorial. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script>
-      // JavaScript to highlight active navbar link based on scroll position
       document.addEventListener('scroll', function() {
         var sections = document.querySelectorAll('section');
         var navLinks = document.querySelectorAll('#navbarLinks .nav-link');
