@@ -14,6 +14,21 @@ Route::options($uri, $callback);
 Route::view($uri, $view, $data = []);
 Route::redirect($from, $to, $status = 302);
 ```
+uri:
+```php
+'/'
+
+'/some/route'
+```
+callback:
+```php
+function () {
+    // ...
+}
+
+[Controller::class, 'myfunction']
+```
+
 You can also group routes or apply middleware:
 ```php
 Route::middleware(['auth'])->group(function () {
