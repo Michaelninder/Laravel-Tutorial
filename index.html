@@ -8,12 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
       .code-box {
-        background-color: #f8f9fa;
-        border-radius: 5px;
-        padding: 15px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        color: #333;
-        font-family: monospace;
       }
       .code-box pre {
         background-color: #272c34;
@@ -48,6 +42,18 @@
               <a class="nav-link" href="#controllers"><i class="bi bi-person-workspace"></i> Controllers</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#middleware"><i class="bi bi-shield-lock"></i> Middleware</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#validation"><i class="bi bi-check-circle"></i> Validation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#auth"><i class="bi bi-person-check"></i> Authentication</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#database"><i class="bi bi-database"></i> Database & Eloquent</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#advanced"><i class="bi bi-gear"></i> Advanced Features</a>
             </li>
           </ul>
@@ -79,38 +85,26 @@ Route::redirect($from, $to, $status = 302);
         <p><strong>uri:</strong> <code>'/'</code> or <code>'/some/route'</code></p>
         <p><strong>callback:</strong> <code>function () { // ... }</code> or <code>[Controller::class, 'myfunction']</code></p>
 
-        <h3>Grouping Routes or Applying Middleware</h3>
-        <div class="code-box">
-          <pre><code>
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        // Only authenticated users may access this route...
-    });
-});
-          </code></pre>
-        </div>
-
-        <h3>Named Routes</h3>
-        <p>You can also give your routes a name to make them easier to refer to:</p>
-        <div class="code-box">
-          <pre><code>
-Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
-          </code></pre>
-        </div>
-        <p>Now, you can refer to this route using its name in your views or controllers:</p>
-        <div class="code-box">
-          <pre><code>
-route('profile.show');
-          </code></pre>
-        </div>
-
         <h3>Route Parameters</h3>
-        <p>You can define parameters in your routes:</p>
         <div class="code-box">
           <pre><code>
 Route::get('/user/{id}', function ($id) {
     return 'User ID: ' . $id;
 });
+          </code></pre>
+        </div>
+
+        <h3>Named Routes</h3>
+        <p>You can define named routes to easily reference them in your application:</p>
+        <div class="code-box">
+          <pre><code>
+Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
+          </code></pre>
+        </div>
+        <p>Refer to a named route using:</p>
+        <div class="code-box">
+          <pre><code>
+route('profile.show');
           </code></pre>
         </div>
       </section>
@@ -130,18 +124,11 @@ return view('auth.login'); // resources/views/auth/login.blade.php
         </div>
 
         <h3>Passing Data to Views</h3>
-        <p>You can pass data to a view in several ways:</p>
         <div class="code-box">
           <pre><code>
 return view('profile', ['name' => 'Michaelninder']); // fixed value
 return view('profile', ['name' => $name]); // variable
 return view('profile', compact('name')); // if both values (variable and datavalue have the same name)
-          </code></pre>
-        </div>
-        <p>Example Blade File (<code>resources/views/profile.blade.php</code>):</p>
-        <div class="code-box">
-          <pre><code>
-&lt;h1&gt;Hello, {{ $name }}&lt;/h1&gt;
           </code></pre>
         </div>
 
@@ -153,15 +140,34 @@ return view('profile', compact('name')); // if both values (variable and dataval
 @endif
           </code></pre>
         </div>
-        <p>Blade also provides convenient directives for loops and conditionals, including:</p>
+
+        <h3>Layouts & Components</h3>
+        <p>Laravel Blade also supports layouts and components:</p>
         <div class="code-box">
           <pre><code>
-@foreach ($users as $user)
-    {{ $user->name }}
-@endforeach
+<!-- resources/views/layouts/app.blade.php -->
+<html>
+  <head>
+    <title>@yield('title')</title>
+  </head>
+  <body>
+    @yield('content')
+  </body>
+</html>
           </code></pre>
         </div>
-        <p>This section will soon be continued with layouts (<code>@extends</code>, <code>@section</code>, <code>@yield</code>) and components.</p>
+        <div class="code-box">
+          <pre><code>
+<!-- resources/views/home.blade.php -->
+@extends('layouts.app')
+
+@section('title', 'Home Page')
+
+@section('content')
+  <h1>Welcome to Home!</h1>
+@endsection
+          </code></pre>
+        </div>
       </section>
 
       <hr>
@@ -220,9 +226,151 @@ Route::resource('posts', PostController::class);
 
       <hr>
 
+      <section id="middleware">
+        <h2 class="mt-5">Middleware <i class="bi bi-shield-lock"></i></h2>
+        <p>Middleware provides a convenient mechanism for filtering HTTP requests entering your application.</p>
+
+        <h3>Creating Middleware</h3>
+        <div class="code-box">
+          <pre><code>
+php artisan make:middleware CheckAge
+          </code></pre>
+        </div>
+
+        <h3>Defining Middleware Logic</h3>
+        <div class="code-box">
+          <pre><code>
+class CheckAge
+{
+    public function handle($request, Closure $next)
+    {
+        if ($request->age < 18) {
+            return redirect('home');
+        }
+
+        return $next($request);
+    }
+}
+          </code></pre>
+        </div>
+
+        <h3>Applying Middleware</h3>
+        <div class="code-box">
+          <pre><code>
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('check.age');
+          </code></pre>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="validation">
+        <h2 class="mt-5">Validation <i class="bi bi-check-circle"></i></h2>
+        <p>Laravel provides powerful validation functionality to validate incoming data.</p>
+
+        <h3>Basic Validation</h3>
+        <div class="code-box">
+          <pre><code>
+$request->validate([
+    'email' => 'required|email',
+    'password' => 'required|min:6',
+]);
+          </code></pre>
+        </div>
+
+        <h3>Custom Error Messages</h3>
+        <div class="code-box">
+          <pre><code>
+$request->validate([
+    'email' => 'required|email',
+], [
+    'email.required' => 'We need to know your e-mail address!',
+]);
+          </code></pre>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="auth">
+        <h2 class="mt-5">Authentication <i class="bi bi-person-check"></i></h2>
+        <p>Laravel offers a built-in authentication system for handling login and registration.</p>
+
+        <h3>Authentication Scaffolding</h3>
+        <p>Use the following Artisan command to scaffold authentication views and routes:</p>
+        <div class="code-box">
+          <pre><code>
+php artisan make:auth
+          </code></pre>
+        </div>
+
+        <h3>Protecting Routes with Auth</h3>
+        <div class="code-box">
+          <pre><code>
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+          </code></pre>
+        </div>
+
+        <h3>Logging Out</h3>
+        <div class="code-box">
+          <pre><code>
+public function logout()
+{
+    Auth::logout();
+    return redirect('/login');
+}
+          </code></pre>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="database">
+        <h2 class="mt-5">Database & Eloquent <i class="bi bi-database"></i></h2>
+        <p>Laravel's Eloquent ORM makes it easy to interact with your database.</p>
+
+        <h3>Database Migrations</h3>
+        <p>Create a migration using Artisan:</p>
+        <div class="code-box">
+          <pre><code>
+php artisan make:migration create_posts_table
+          </code></pre>
+        </div>
+
+        <h3>Eloquent Models</h3>
+        <p>Eloquent provides an easy way to interact with your database records:</p>
+        <div class="code-box">
+          <pre><code>
+class Post extends Model
+{
+    protected $fillable = ['title', 'content'];
+}
+          </code></pre>
+        </div>
+
+        <h3>Querying with Eloquent</h3>
+        <div class="code-box">
+          <pre><code>
+$posts = Post::where('status', 'published')->get();
+          </code></pre>
+        </div>
+
+        <h3>Inserting Data</h3>
+        <div class="code-box">
+          <pre><code>
+Post::create([
+    'title' => 'New Post',
+    'content' => 'Post content here...',
+]);
+          </code></pre>
+        </div>
+      </section>
+
+      <hr>
+
       <section id="advanced">
         <h2 class="mt-5">Advanced Features <i class="bi bi-gear"></i></h2>
-        <p>Laravel provides a range of advanced features, including:</p>
+        <p>Laravel provides several advanced features for building powerful applications:</p>
         <ul>
           <li><strong>Queues</strong>: Handle background tasks asynchronously.</li>
           <li><strong>Events & Listeners</strong>: Listen for and handle events in your application.</li>
@@ -231,7 +379,6 @@ Route::resource('posts', PostController::class);
           <li><strong>Mail</strong>: Send email from your application.</li>
           <li><strong>Task Scheduling</strong>: Automatically schedule tasks such as clearing logs or sending daily emails.</li>
         </ul>
-        <p>We'll dive into these topics in future tutorials!</p>
       </section>
     </div>
 
