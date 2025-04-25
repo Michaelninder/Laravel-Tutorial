@@ -39,7 +39,7 @@ return view('auth.login'); // resources/views/auth/login.blade.php
 ### Passing Data to Views
 You can pass data to a view in several ways:
 ```php
-return view('profile', ['name' => 'Taylor']); // fixed value
+return view('profile', ['name' => 'Michaelninder']); // fixed value
 
 return view('profile', ['name' => $name]); // varible
 
