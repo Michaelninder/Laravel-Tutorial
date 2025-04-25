@@ -25,10 +25,16 @@ Route::middleware(['auth'])->group(function () {
 
 
 ## Views
+Create a controller using Artisan:
+```
+php artisan make:view auth.login // creates resources/views/auth/login.blade.php
+```
 Views are stored in the `resources/views` directory.
 To return a view from a route or controller:
 ```php
 return view('welcome'); // resources/views/welcome.blade.php
+
+return view('auth.login'); // resources/views/auth/login.blade.php
 ```
 ### Passing Data to Views
 You can pass data to a view in several ways:
