@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-adsense-account" content="ca-pub-7826664612633874">
+	<meta name="description" content="Learn Laravel easily with this tutorial on routes, views, controllers, middleware, validation, authentication, and more!">
+	<meta name="author" content="by xpsystems.eu">
+
     <title>Laravel Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -67,48 +70,156 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Laravel Tutorial</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav" id="navbarLinks">
-            <li class="nav-item">
-              <a class="nav-link" href="#routes"><i class="bi bi-map"></i> Routes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#views"><i class="bi bi-file-earmark-code"></i> Views</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#controllers"><i class="bi bi-person-workspace"></i> Controllers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#middleware"><i class="bi bi-shield-lock"></i> Middleware</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#validation"><i class="bi bi-check-circle"></i> Validation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#auth"><i class="bi bi-person-check"></i> Authentication</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#database"><i class="bi bi-database"></i> Database & Eloquent</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#advanced"><i class="bi bi-gear"></i> Advanced Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#localization"><i class="bi bi-globe"></i> Localization</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#blade"><i class="bi bi-file-earmark-code"></i> Blade Advanced</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <!-- Navbar (Mobile Only) -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary d-lg-none fixed-top">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="#">Laravel Tutorial</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="mobileNavbar">
+	      <ul class="navbar-nav" id="mobileNavbarLinks">
+	        <li class="nav-item">
+	          <a class="nav-link" href="#routes"><i class="bi bi-map"></i> Routes</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#views"><i class="bi bi-file-earmark-code"></i> Views</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#controllers"><i class="bi bi-person-workspace"></i> Controllers</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#middleware"><i class="bi bi-shield-lock"></i> Middleware</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#validation"><i class="bi bi-check-circle"></i> Validation</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#auth"><i class="bi bi-person-check"></i> Authentication</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#database"><i class="bi bi-database"></i> Database & Eloquent</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#advanced"><i class="bi bi-gear"></i> Advanced Features</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#localization"><i class="bi bi-globe"></i> Localization</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#blade"><i class="bi bi-file-earmark-code"></i> Blade Advanced</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#api-resources"><i class="bi bi-cloud-download"></i> API Resources</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#form-requests"><i class="bi bi-file-text"></i> Form Requests</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#file-uploads"><i class="bi bi-upload"></i> File Uploads</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#notifications"><i class="bi bi-bell"></i> Notifications</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#authorization"><i class="bi bi-shield-shaded"></i> Authorization</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#testing"><i class="bi bi-bug"></i> Testing</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#scheduler"><i class="bi bi-clock-history"></i> Scheduler</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#collections"><i class="bi bi-collection"></i> Collections</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#helpers"><i class="bi bi-lightbulb"></i> Helper Functions</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#service-providers"><i class="bi bi-box-seam"></i> Service Providers</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#facades"><i class="bi bi-building"></i> Facades</a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	
+	<!-- Sidebar (Desktop Only) -->
+	<aside class="d-none d-lg-block bg-light position-fixed" style="top: 0; bottom: 0; width: 220px; padding-top: 1rem; overflow-y: auto;">
+	  <div class="px-3 mb-4">
+	    <h5 class="text-primary fw-bold">Laravel Tutorial</h5>
+	  </div>
+	  <ul class="nav flex-column px-3" id="sidebarLinks">
+	    <li class="nav-item">
+	      <a class="nav-link" href="#routes"><i class="bi bi-map"></i> Routes</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#views"><i class="bi bi-file-earmark-code"></i> Views</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#controllers"><i class="bi bi-person-workspace"></i> Controllers</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#middleware"><i class="bi bi-shield-lock"></i> Middleware</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#validation"><i class="bi bi-check-circle"></i> Validation</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#auth"><i class="bi bi-person-check"></i> Authentication</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#database"><i class="bi bi-database"></i> Database & Eloquent</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#advanced"><i class="bi bi-gear"></i> Advanced Features</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#localization"><i class="bi bi-globe"></i> Localization</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#blade"><i class="bi bi-file-earmark-code"></i> Blade Advanced</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#api-resources"><i class="bi bi-cloud-download"></i> API Resources</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#form-requests"><i class="bi bi-file-text"></i> Form Requests</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#file-uploads"><i class="bi bi-upload"></i> File Uploads</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#notifications"><i class="bi bi-bell"></i> Notifications</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#authorization"><i class="bi bi-shield-shaded"></i> Authorization</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#testing"><i class="bi bi-bug"></i> Testing</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#scheduler"><i class="bi bi-clock-history"></i> Scheduler</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#collections"><i class="bi bi-collection"></i> Collections</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#helpers"><i class="bi bi-lightbulb"></i> Helper Functions</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#service-providers"><i class="bi bi-box-seam"></i> Service Providers</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#facades"><i class="bi bi-building"></i> Facades</a>
+	    </li>
+	  </ul>
+	</aside>
+
+
 
     <div class="container my-5 pt-5">
       <h1 class="display-4 text-center">Laravel Tutorial</h1>
@@ -543,6 +654,210 @@ return [
 @section('content')
   &lt;h1&gt;Home Page&lt;/h1&gt;
 @endsection
+	      </code></pre>
+	    </div>
+	  </section>
+		  
+		  
+	  <section id="api-resources">
+	    <h2 class="mt-5">API Resources <i class="bi bi-cloud-download"></i></h2>
+	    <p>Laravel provides API resources to transform models and collections into JSON easily.</p>
+	  
+	    <h3>Creating a Resource</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  php artisan make:resource UserResource
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Example Resource Class</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  class UserResource extends JsonResource
+	  {
+	      public function toArray($request)
+	      {
+	          return [
+	              'id' => $this->id,
+	              'name' => $this->name,
+	              'email' => $this->email,
+	          ];
+	      }
+	  }
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Using a Resource</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  return new UserResource($user);
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="form-requests">
+	    <h2 class="mt-5">Form Requests <i class="bi bi-file-text"></i></h2>
+	    <p>Form requests are custom request classes that encapsulate validation and authorization logic.</p>
+	  
+	    <h3>Creating a Form Request</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  php artisan make:request StorePostRequest
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Using Form Requests</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  public function store(StorePostRequest $request)
+	  {
+	      $validated = $request->validated();
+	      // Save data
+	  }
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="file-uploads">
+	    <h2 class="mt-5">File Uploads <i class="bi bi-upload"></i></h2>
+	    <p>Laravel makes it simple to upload and store files.</p>
+	  
+	    <h3>Uploading a File</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  public function upload(Request $request)
+	  {
+	      $path = $request->file('avatar')->store('avatars');
+	      return $path;
+	  }
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="notifications">
+	    <h2 class="mt-5">Notifications <i class="bi bi-bell"></i></h2>
+	    <p>Laravel supports sending notifications via mail, database, SMS, Slack, and more.</p>
+	  
+	    <h3>Creating a Notification</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  php artisan make:notification InvoicePaid
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Sending a Notification</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  $user->notify(new InvoicePaid($invoice));
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="authorization">
+	    <h2 class="mt-5">Authorization (Gates & Policies) <i class="bi bi-shield-shaded"></i></h2>
+	    <p>Laravel provides simple ways to authorize actions via gates and policies.</p>
+	  
+	    <h3>Creating a Policy</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  php artisan make:policy PostPolicy --model=Post
+	      </code></pre>
+	    </div>
+	  
+	    <h3>Using a Policy</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  $this->authorize('update', $post);
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="testing">
+	    <h2 class="mt-5">Testing <i class="bi bi-bug"></i></h2>
+	    <p>Laravel includes a rich set of tools for testing your application.</p>
+	  
+	    <h3>Basic Feature Test</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  public function test_homepage_loads()
+	  {
+	      $response = $this->get('/');
+	      $response->assertStatus(200);
+	  }
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="scheduler">
+	    <h2 class="mt-5">Task Scheduling <i class="bi bi-clock-history"></i></h2>
+	    <p>Laravel's scheduler allows you to fluently schedule tasks within your application.</p>
+	  
+	    <h3>Defining Scheduled Tasks</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  // app/Console/Kernel.php
+	  protected function schedule(Schedule $schedule)
+	  {
+	      $schedule->command('emails:send')->daily();
+	  }
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="collections">
+	    <h2 class="mt-5">Collections <i class="bi bi-collection"></i></h2>
+	    <p>Laravel collections provide a fluent, convenient wrapper for working with arrays of data.</p>
+	  
+	    <h3>Example Usage</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  $users = collect(['John', 'Jane', 'Doe']);
+	  $filtered = $users->filter(function ($user) {
+	      return strlen($user) > 3;
+	  });
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="helpers">
+	    <h2 class="mt-5">Helper Functions <i class="bi bi-lightbulb"></i></h2>
+	    <p>Laravel offers many global helper functions to make common tasks easier.</p>
+	  
+	    <h3>Examples</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  $url = route('profile.show');
+	  $path = public_path('images/photo.jpg');
+	  $env = env('APP_ENV');
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="service-providers">
+	    <h2 class="mt-5">Service Providers <i class="bi bi-box-seam"></i></h2>
+	    <p>Service providers are the central place to configure and bind services in Laravel.</p>
+	  
+	    <h3>Registering a Service</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  public function register()
+	  {
+	      $this->app->bind('SomeService', function ($app) {
+	          return new SomeService();
+	      });
+	  }
+	      </code></pre>
+	    </div>
+	  </section>
+	  
+	  <section id="facades">
+	    <h2 class="mt-5">Facades <i class="bi bi-building"></i></h2>
+	    <p>Facades provide a "static" interface to classes in the service container.</p>
+	  
+	    <h3>Using a Facade</h3>
+	    <div class="code-box">
+	      <pre><code>
+	  Cache::put('key', 'value', 600);
 	      </code></pre>
 	    </div>
 	  </section>
