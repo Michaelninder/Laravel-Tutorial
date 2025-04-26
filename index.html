@@ -26,14 +26,14 @@
       .code-box code {
         font-size: 1.1em;
       }
-      .navbar .nav-link.active {
+      nav .nav-link.active {
         background-color: #a5d1ff81 !important;
         color: white !important;
         transition: background-color 0.3s ease, color 0.3s ease;
         border-color: #272c34;
         border-radius: 16px
       }
-      .navbar .nav-link {
+      nav .nav-link {
         transition: background-color 0.3s ease, color 0.3s ease;
         border-radius: 16px;
       }
@@ -67,6 +67,13 @@
         background-color: #5b89d20e; 
         border-radius: 7px;
       }
+	  aside {
+		top: 0;
+		bottom: 0;
+		width: 13%;
+		padding-top: 1rem;
+		overflow-y: auto;
+	  }
     </style>
   </head>
   <body>
@@ -148,7 +155,7 @@
 	</nav>
 	
 	<!-- Sidebar (Desktop Only) -->
-	<aside class="d-none d-lg-block bg-light position-fixed" style="top: 0; bottom: 0; width: 255px; padding-top: 1rem; overflow-y: auto;">
+	<aside class="d-none d-lg-block bg-light position-fixed">
 	  <div class="px-3 mb-4">
 	    <h5 class="text-primary fw-bold">Laravel Tutorial</h5>
 	  </div>
